@@ -1,0 +1,42 @@
+<html{% block html %}{% endblock %}>
+    <head>
+        <title>{% block title %}oAuth.cz{% endblock %}</title>
+        <link rel="stylesheet" href="/static/site.css">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="application-name" content="oAuth">
+        <meta name="msapplication-tooltip" content="oAuth">
+        <meta name="msapplication-navbutton-color" content="#00C5FF">
+        <meta name="msapplication-window" content="width=1024;height=768">
+        <link rel="shortcut icon" type="image/x-icon" href="/static/sourcelab.ico">
+        {% block head %}{% endblock %}
+    </head>
+
+    <body class="layout col">
+        <header class="page-header container layout row">
+            <a href="/" class="logo cursor-pointer layout row align-center">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 70 36" style="width: 4rem"><title>sourcelab</title><path d="M205.54,49.31l-2.74,2.76L185.94,38,202.8,23.92l2.74,2.79L191.86,37.94Z" transform="translate(-185.94 -18)" style="fill:#00c5ff"/><path d="M236.36,26.7l2.71-2.79L255.94,38,239.07,52.07l-2.71-2.76L250,38Z" transform="translate(-185.94 -18)" style="fill:#00c5ff"/><polygon points="30.43 31 45.49 0 39.52 0 22.01 36 45.06 36 45.06 31 30.43 31" style="fill:#f60541"/></svg>
+                <h1 class="h4 m-l-2 m-b-0">oAuth Server</h1>
+            </a>
+            <span class="flex"></span>
+            <nav class="layout row align-center justify-between">
+                {% block nav %}{% endblock %}
+            </nav>
+        </header>
+
+
+        <div class="flex layout row">
+            <main class="page-content flex layout row">
+                {% block main %}{% endblock %}
+            </main>
+        </div>
+
+
+        <footer class="spread page-footer">
+            <div class="container">
+                <div class="copy text-center">
+                    <small>COPYRIGHT © 2016 <a href="https://www.sourcelab.cz" target="_blank">SourceLab s.r.o.</a> | All rights reserved</small>
+                </div>
+            </div>
+        </footer>
+    </body>
+</html>

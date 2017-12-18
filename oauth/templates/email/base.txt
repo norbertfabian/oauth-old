@@ -1,0 +1,8 @@
+{% block title %}{{ 'Pokusný email'|h1 }}{% endblock %}
+{% block content %}Tento email je testovací{% endblock %}
+{% block footer %}
+Tento email byl vegenerován automaticky. Pokud s jeho doručením nesouhlasíte, stačí jej ignorovat. Další emaily by již přijít neměly.
+Pokud ovšem chcete zabránit jakýmkoli budoucím emailům z naší domény, můžete se odhlásit z příjmání zpráv následujícím odkazem:
+{{ url_for('blacklist', email=email, hash=email|hashmail, _external=True) }}
+
+{% endblock %}

@@ -1,0 +1,37 @@
+{% extends "html/base.html" %}
+{% block title %}oAuth.cz | Přihlášení{% endblock %}
+{% block main %}
+    <div class="container steps max-xs layout row align-center">
+        <form method="post" class="form">
+            <fieldset>
+                <legend>Přihlášení</legend>
+
+                <label class="input-container">
+                    <span>Uživatelské jméno</span>
+                    <input type="text" name="username" placeholder="Uživatelské jméno" />
+                </label>
+
+                <label class="input-container">
+                    <span>Heslo</span>
+                    <input type="password" name="password" placeholder="Heslo" />
+                </label>
+
+                <div class="layout row wrap justify-between m-t-2">
+                    <a href="{{ url_for('registration') }}" class="btn raised muted">Zaregistrovat se</a>
+                    <input type="submit" value="Přihlásit se" class="btn primary" />
+                </div>
+
+            </fieldset>
+        </form>
+    </div>
+{% endblock %}
+
+{% block nav %}
+<!--    <nav-item class="nav-item">
+        <a href="#" class="nav-btn">Advert 1</a>
+    </nav-item>-->
+{% endblock %}
+
+{% block footer %}
+Powered by Martin Miksanik
+{% endblock %}

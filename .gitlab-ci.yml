@@ -1,0 +1,33 @@
+stages:
+    - test
+    - deploy
+
+master_deploy:
+    stage: deploy
+    script:
+        - ssh profires@pool1 "mkdir -p $OAUTH_PATH"
+        - rsync -ae ssh $PWD/oauth/  profires@pool1:$OAUTH_PATH/
+        - scp requirements.txt profires@pool1:$PYTHONHOME
+        - ssh profires@pool1 "virtualenv $PYTHONHOME"
+        - ssh profires@pool1 "PYTHONHOME=$PYTHONHOME pip install -U -r $PYTHONHOME/requirements.txt"
+        - ssh profires@pool1 "echo -e \"$CONFIG\" > $PYTHONHOME/config_production.py"
+        - psql profires  -c "UPDATE server.vassal SET change = NOW() WHERE id_vassal IN ($VASSALS)"
+    only:
+        - tags
+    tags:
+        - git
+
+tags_deploy:
+    stage: deploy
+    script:
+        - ssh profires@pool1 "mkdir -p $TEST_OAUTH_PATH"
+        - rsync -ae ssh $PWD/oauth/  profires@pool1:$TEST_OAUTH_PATH/
+        - scp requirements.txt profires@pool1:$TEST_PYTHONHOME
+        - ssh profires@pool1 "virtualenv $TEST_PYTHONHOME"
+        - ssh profires@pool1 "PYTHONHOME=$TEST_PYTHONHOME pip install -U -r $TEST_PYTHONHOME/requirements.txt"
+        - ssh profires@pool1 "echo -e \"$TEST_CONFIG\" > $TEST_PYTHONHOME/config_production.py"
+        - psql profires  -c "UPDATE server.vassal SET change = NOW() WHERE id_vassal IN ($TEST_VASSALS)"
+    only:
+        - master
+    tags:
+        - git

@@ -1,0 +1,7 @@
+//
+// Contextual backgrounds
+//
+
+@each $name, $variant in $colors {
+    @include bg-variant('.bg-#{$name}', $variant);
+}

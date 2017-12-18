@@ -1,0 +1,12 @@
+.page-header {
+    border-bottom: $gray-light-2 1px solid;
+    height: 3rem;
+
+    a {
+        color: $gray-light-1;
+
+        &:hover, &:active, &:focus {
+            text-decoration: none;
+        }
+    }
+}

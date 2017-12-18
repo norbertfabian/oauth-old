@@ -1,0 +1,31 @@
+{
+  "name": "oauth",
+  "version": "0.0.0",
+  "private": true,
+  "dependencies": {
+    "components-font-awesome": "~4.6.3"
+  },
+  "devDependencies": {
+    "bourbon": "~4.2.7",
+    "angular": "^1.5.7",
+    "angular-resource": "^1.5.7",
+    "angular-route": "^1.5.7",
+    "angular-ui-router": "^0.3.1",
+    "angular-local-storage": "^0.2.7",
+    "angular-sanitize": "^1.5.7"
+  },
+  "main": [
+    "index.html"
+  ],
+  "ignore": [
+    "bin",
+    "node_modules",
+    "Scripts",
+    "style",
+    "tcl",
+    "typings",
+    "vendor",
+    "gulpconfig.json",
+    "gulpfile.js"
+  ]
+}

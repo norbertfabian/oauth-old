@@ -1,0 +1,13 @@
+.hide { display: none !important; }
+
+@each $breakpoint in map-keys($grid-breakpoints) {
+    @include media-breakpoint-only($breakpoint) {
+        .hide-#{$breakpoint}     { display: none !important; }
+    }
+    @include media-breakpoint-up($breakpoint) {
+        .hide-gt-#{$breakpoint}     { display: none !important; }
+    }
+    @include media-breakpoint-down($breakpoint) {
+        .hide-lt-#{$breakpoint}     { display: none !important; }
+    }
+}

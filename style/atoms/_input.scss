@@ -1,0 +1,74 @@
+@import '../variables';
+
+@mixin input-size($height: map-get(map-get($form-control-size, default), height),
+                  $padding-x: map-get(map-get($form-control-size, default), padding-x)) {
+    height: $height;
+    padding: 0 $padding-x;
+}
+
+@mixin input() {
+    align-items: center;
+    background: $input-background;
+    border: $input-border;
+    border-radius: $input-border-radius;
+    display: inline-flex;
+    justify-content: flex-start;
+    -webkit-appearance: none; // safari fix
+    transition: border $timing-duration $timing-fn,
+                color $timing-duration $timing-fn;
+
+    &:not(.disabled):not(:disabled):not([disabled]) {
+        &:focus, &:active, &.active {
+            border: $input-border-a;
+        }
+    }
+    &.disabled, &:disabled, &[disabled] {
+        background: $input-background-d;
+        border: $input-border-d;
+    }
+
+    &.error, &:not(.ng-pristine).ng-invalid {
+        border: $input-border-e;
+    }
+
+    @include input-size();
+}
+
+input:not([type=button]):not([type=submit]):not([type=checkbox]),
+textarea {
+    @include input();
+}
+
+.input-container {
+    display: flex;
+
+
+    &:not(.inline) {
+        position: relative;
+        padding-top: 1.25em;
+
+        span:first-child {
+            display: block;
+            font-size: .75em;
+            position: absolute;
+            top: 0;
+            width: 100%;
+        }
+
+        input:not([type=button]):not([type=submit]):not([type=checkbox]), textarea {
+            flex: 1 0 auto;
+        }
+    }
+
+    .input-group {
+        display: flex;
+        flex: 1 0 100%;
+        margin-left: -($spacer-x);
+        margin-right: -($spacer-x);
+
+        > input, button, textarea {
+            margin-left: $spacer-x;
+            margin-right: $spacer-x;
+        }
+    }
+}

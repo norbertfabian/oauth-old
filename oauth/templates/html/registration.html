@@ -1,0 +1,46 @@
+{% extends "html/base.html" %}
+{% block title %}oAuth.cz | Registrace{% endblock %}
+{% block main %}
+    <div class="container steps max-sm layout row align-center">
+        {% if g.registration_done%}
+        <p class="alert primary">
+            Na Vámi zadanou adresu {{ request.form.get('email', '') }} jsme odeslali email s dalším postupem.
+        </p>
+        {% else %}
+        <form method="post" class="form">
+            <fieldset>
+                <legend>Registrace</legend>
+
+                <label class="input-container">
+                    <span>Username</span>
+                    <input name="username" value="{{ request.form.get('username', '') }}" />
+                    <div class="error">{{ g.errors.get('username', '') }}</div>
+                </label>
+
+                <label class="input-container">
+                    <span>Email</span>
+                    <input name="email" value="{{ request.form.get('email', '') }}" />
+                    <div class="error">{{ g.errors.get('email', '') }}</div>
+                </label>
+
+                <label class="input-container">
+                    <span>Password</span>
+                    <input name="password" type="password" value="{{ request.form.get('password', '') }}" />
+                    <div class="error">{{ g.errors.get('password', '') }}</div>
+                </label>
+                <label class="input-container">
+                    <span>Password confirm</span>
+                    <input name="password_confirm" type="password" value="{{ request.form.get('password_confirm', '') }}" />
+                    <div class="error">{{ g.errors.get('password_confirm', '') }}</div>
+                </label>
+                <div class="text-right m-t-2">
+                    <button type="submit" class="primary">Zaregistrovat se</button>
+                </div>
+            </fieldset>
+        </form>
+        {% endif %}
+    </div>
+{% endblock %}
+{% block footer %}
+Powered by Martin Miksanik
+{% endblock %}

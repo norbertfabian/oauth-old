@@ -1,0 +1,115 @@
+/// Grid system
+//
+// Generate semantic grid columns with these mixins.
+
+@mixin make-container($gutter: $grid-gutter-x) {
+    margin-left: auto;
+    margin-right: auto;
+    padding-left:  ($gutter / 2);
+    padding-right: ($gutter / 2);
+    width: 100%;
+}
+
+// For each breakpoint, define the maximum width of the container in a media query
+@mixin make-container-max-widths($max-widths: $container-max-widths) {
+    @each $breakpoint, $container-max-width in $max-widths {
+        @include media-breakpoint-up($breakpoint) {
+            max-width: $container-max-width;
+        }
+    }
+}
+
+@mixin make-container-max-classes($max-widths: $container-max-widths) {
+    @each $breakpoint, $container-max-width in $max-widths {
+        // @include media-breakpoint-up($breakpoint) {
+        &.steps.max-#{$breakpoint}, &.max-#{$breakpoint} { max-width: $container-max-width; }
+        // }
+    }
+}
+
+@mixin make-layout($gutter-x: $grid-gutter-x, $gutter-y: $grid-gutter-y) {
+    display: flex;
+    &.gutter { margin: ($gutter-y / -2) ($gutter-x / -2); }
+}
+
+@mixin make-layout-items($columns: $grid-columns, $gutter-x: $grid-gutter-x, $gutter-y: $grid-gutter-y, $breakpoints: $grid-breakpoints) {
+    // Common properties for all breakpoints
+    %layout-item {
+        @include make-flex($gutter-x, $gutter-y);
+    }
+
+    // Default flex classes
+    @for $i from 1 through $columns {
+        .flex-#{$i} {
+            @extend %layout-item;
+            @include make-flex-span($i, $columns);
+        }
+    }
+    @each $modifier in (pull, push, offset) {
+        @for $i from 0 through $columns {
+            .flex-#{$modifier}-#{$i} {
+                @include make-flex-modifier($modifier, $i, $columns)
+            }
+        }
+    }
+
+    // Responsive
+    @each $breakpoint in map-keys($breakpoints) {
+        @for $i from 1 through $columns {
+            .flex-#{$breakpoint}-#{$i} {
+                @extend %layout-item;
+            }
+        }
+        @include media-breakpoint-up($breakpoint) {
+            // Work around cross-media @extend (https://github.com/sass/sass/issues/1050)
+            @for $i from 1 through $columns {
+                .flex-#{$breakpoint}-#{$i} {
+                    @include make-flex-span($i, $columns);
+                }
+            }
+            @each $modifier in (pull, push, offset) {
+                @for $i from 0 through $columns {
+                    .flex-#{$breakpoint}-#{$modifier}-#{$i} {
+                        @include make-flex-modifier($modifier, $i, $columns)
+                    }
+                }
+            }
+        }
+    }
+}
+
+@mixin make-flex($gutter-x: $grid-gutter-x, $gutter-y: $grid-gutter-y) {
+    position: relative;
+    // Prevent columns from collapsing when empty
+    min-height: 1px;
+    // Inner gutter via padding
+    .gutter > & { padding: ($gutter-y / 2) ($gutter-x / 2); }
+}
+
+@mixin make-flex-span($size, $columns: $grid-columns) {
+    flex: 0 0 percentage($size / $columns);
+    width: percentage($size / $columns);
+}
+
+@mixin make-flex-offset($size, $columns: $grid-columns) {
+    margin-left: percentage($size / $columns);
+}
+
+@mixin make-flex-push($size, $columns: $grid-columns) {
+    left: if($size > 0, percentage($size / $columns), auto);
+}
+
+@mixin make-flex-pull($size, $columns: $grid-columns) {
+    right: if($size > 0, percentage($size / $columns), auto);
+}
+
+@mixin make-flex-modifier($type, $size, $columns) {
+    // Work around the lack of dynamic mixin @include support (https://github.com/sass/sass/issues/626)
+    @if $type == push {
+        @include make-flex-push($size, $columns);
+    } @else if $type == pull {
+        @include make-flex-pull($size, $columns);
+    } @else if $type == offset {
+        @include make-flex-offset($size, $columns);
+    }
+}

@@ -1,0 +1,23 @@
+// // Margin and Padding
+
+// .m-x-auto {
+//   margin-right: auto !important;
+//   margin-left:  auto !important;
+// }
+
+@each $prop, $abbrev in (margin: m, padding: p) {
+    @each $size, $lengths in $spacers {
+        $length-x:   map-get($lengths, x);
+        $length-y:   map-get($lengths, y);
+
+        @include set-spacing($prop, $abbrev, $size, $length-x, $length-y);
+    }
+}
+
+// Negative Margin
+@each $size, $lengths in $spacers {
+    $length-x:   map-get($lengths, x);
+    $length-y:   map-get($lengths, y);
+
+    @include set-spacing(margin, m-n, $size, -$length-x, -$length-y);
+}

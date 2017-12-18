@@ -1,0 +1,32 @@
+{% extends "html/base.html" %}
+
+{% block html %} xmlns:ng="http://angularjs.org" ng-app="oauth" ng-controller="MainCtrl"{% endblock %}
+
+{% block title %}oAuth.cz | Přihlášeno{% endblock %}
+
+{% block head %}
+<script src="/static/site.min.js"></script>
+{% endblock %}
+
+{% block main %}
+    <div class="container layout row">
+        <aside class="sidenav">
+            <nav>
+                <a href="#"><i class="fa fa-fw fa-envira" aria-hidden="true"></i><span class="label">Menu 1</span></a>
+                <a href="#"><i class="fa fa-fw fa-area-chart" aria-hidden="true"></i><span class="label">Menu 2</span></a>
+                <a href="#"><i class="fa fa-fw fa-university" aria-hidden="true"></i><span class="label">Menu 3</span></a>
+            </nav>
+        </aside>
+        <section class="text-center flex layout col align-center justify-center" ui-view="main">
+            <h1>Přihlášeno</h1>
+            <p><i class="fa fa-5x fa-check color-primary" aria-hidden="true"></i></p>
+        </section>
+    </div>
+    <code>
+    {{ g.errors }}
+    </code>
+{% endblock %}
+
+{% block nav %}
+    <a href="{{ url_for('logout') }}" title="Odhlásit se"><i class="fa fa-sign-out" aria-hidden="true"></i> <span class="hide-xs">Odhlásit se</span></a>
+{% endblock %}

@@ -1,0 +1,16 @@
+{% extends "html/base.html" %}
+{% block title %}oAuth.cz | Ověření registrace{% endblock %}
+{% block main %}
+    <div class="container steps max-xs layout col align-center justify-center text-center">
+        <h1 class="h4 m-b-3">Ověření registrace</h1>
+        {% if user %}
+            <p>Děkujeme za registraci na <a href="https://oauth.cz/">oAuth.cz</a>.<br>Můžete pokračovat <a href="https://oauth.cz/">dále</a>.</p>
+        {% else %}
+            <p class="alert danger">Ověřovací klíč není platný.</p>
+        {% endif %}
+
+        <code>
+        {{ g.errors }}
+        </code>
+    </div>
+{% endblock %}

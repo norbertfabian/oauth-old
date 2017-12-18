@@ -1,0 +1,42 @@
+.sidenav {
+    @include flex(0 0 12rem);
+    border-right: $gray-light-2 1px solid;
+    margin-right: $spacer-x;
+    margin-left: -$spacer-x;
+
+    a {
+        display: block;
+        padding: ($spacer-y/2) $spacer-x;
+        width: 100%;
+
+        &:not(:first-child) {
+            border-top: $gray-light-2 1px solid;
+        }
+
+        &:hover, &:active, &:focus {
+            text-decoration: none;
+        }
+        &:hover, &.active {
+            background: $gray-light-3;
+            color: $color-accent;
+        }
+    }
+
+    .label {
+        color: $gray-light-1;
+        margin-left: $spacer-x;
+    }
+
+    @include media-breakpoint-down(sm) {
+        @include flex(0 0 auto);
+
+        a {
+            padding: .5rem;
+            width: inherit;
+        }
+
+        .label {
+            display: none;
+        }
+    }
+}

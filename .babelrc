@@ -1,0 +1,6 @@
+{
+    // "plugins": ["uglify:after"]
+    "presets": [
+        "es2015"
+    ]
+}

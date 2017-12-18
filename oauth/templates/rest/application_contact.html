@@ -1,0 +1,17 @@
+{% extends "rest/base.html" %}
+{% block header %}Rest - Application - user{% endblock %}
+{% block main %}
+    <h1>Login</h1>
+    <form method="post" id="testform">
+        <table>
+            <tr>
+                <th>Contact</th>
+                <td><input type="text" name="contact" /></td>
+            </tr>
+        </table>
+        <input type="submit" value="Zkusit" />
+    </form>
+{% endblock %}
+{% block footer %}
+Powered by Martin Miksanik
+{% endblock %}

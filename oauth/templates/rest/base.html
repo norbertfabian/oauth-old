@@ -1,0 +1,66 @@
+<html>
+    <head>
+        <title>{% block title %}OAuth server{% endblock %}</title>
+        <style>
+            * {text-align: left;}
+        </style>
+        <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+    </head>
+    <body>
+        <header>
+            {% block header %}{% endblock %}
+        </header>
+        <div role="main">
+            {% block main %}{% endblock %}
+        </div>
+
+        <div role="complementary">
+            <code id="result"></code>
+        </div>
+
+        <footer>
+            {% block footer %}{% endblock %}
+        </footer>
+        <script>
+
+        $.fn.serializeObject = function () {
+            var o = {};
+            var a = this.serializeArray();
+            $.each(a, function () {
+                if (o[this.name] !== undefined) {
+                    if (!o[this.name].push) {
+                        o[this.name] = [o[this.name]];
+                    }
+                    o[this.name].push(this.value || '');
+                } else {
+                    o[this.name] = this.value || '';
+                }
+            });
+            return o;
+        };
+
+        $( "#testform" ).submit(function( event ) {
+            event.preventDefault();
+
+            var data = $( "#testform" ).serializeObject();
+            console.log(data);
+            $.ajax({
+                url: '{{ request.url }}',
+                headers: {
+                    '{{ config.OAUTH_HEADER_FIELD }}': '{{ config.TEST_APP_TOKEN }}'
+                },
+                contentType: "application/json; charset=UTF-8",
+                method: 'POST',
+                dataType: 'json',
+                processData: false,
+                data: JSON.stringify(data),
+                complete: function(data){
+                    console.log(data);
+                    $('#result').html(JSON.stringify(data.responseJSON));
+                }
+            });
+
+        });
+        </script>
+    </body>
+</html>

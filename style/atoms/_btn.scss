@@ -1,0 +1,208 @@
+@import '../variables';
+
+$btn-lighten-offset: 12%;
+$btn-fadeout-offset: .4;
+
+@mixin btn-hover() {
+    box-shadow: $btn-shadow;
+    transform: $btn-transform;
+
+    &:hover {
+        box-shadow: $btn-shadow-h;
+        transform: $btn-transform-h;
+    }
+    &:active {
+        box-shadow: $btn-shadow-a;
+        transform: $btn-transform-a;
+    }
+}
+
+@mixin btn-outline($color: $btn-default-color) {
+    background: transparent;
+    border: $color 1px solid;
+    color: $color;
+
+    &:not(.disabled):not(:disabled):not([disabled]) {
+        &:hover {
+            background: transparent;
+            border-color: lighten($color, $btn-lighten-offset);
+            color: lighten($color, $btn-lighten-offset);
+        }
+        &:active {
+            background: transparent;
+            border-color: lighten($color, ($btn-lighten-offset / 2));
+            color: lighten($color, ($btn-lighten-offset / 2));
+        }
+    }
+
+    &:disabled, &[disabled], &.disabled {
+        background: transparent;
+        border-color: fade-out($color, $btn-fadeout-offset);
+        color: fade-out($color, $btn-fadeout-offset);
+    }
+}
+
+@mixin make-btn-outline()
+{
+    @include btn-outline();
+
+    @each $n, $c in $colors {
+        &.#{$n}, &.btn-#{$n} { @include btn-outline($c); }
+    }
+}
+
+@mixin btn-plane($color: $btn-default-color) {
+    background: transparent;
+    border: none;
+    color: $color;
+
+    &:not(.disabled):not(:disabled):not([disabled]) {
+        &:hover {
+            background: transparent;
+            color: lighten($color, $btn-lighten-offset);
+        }
+        &:active {
+            background: transparent;
+            color: lighten($color, ($btn-lighten-offset / 2));
+        }
+    }
+
+    &:disabled, &[disabled], &.disabled {
+        background: transparent;
+        color: fade-out($color, $btn-fadeout-offset);
+    }
+}
+
+@mixin make-btn-plane()
+{
+    @include btn-plane();
+
+    @each $n, $c in $colors {
+        &.#{$n}, &.btn-#{$n} { @include btn-plane($c); }
+    }
+}
+
+@mixin btn-raised($bg: $btn-default-background) {
+    background: $bg;
+
+    &:not(.disabled):not(:disabled):not([disabled]) {
+        &:hover, &:focus { background: lighten($bg, $btn-lighten-offset); }
+        &:active { background: lighten($bg, ($btn-lighten-offset / 2)); }
+    }
+
+    @if ($bg == transparent) {
+        color: inherit;
+    }
+    @else if (lightness($bg) >= 50%) {
+        &, &:link, &:visited, &:hover, &:active, &:focus { color: $black; }
+    }
+    @else {
+        &, &:link, &:visited, &:hover, &:active, &:focus { color: $white; }
+    }
+
+    &:disabled, &.disabled { background-color: fade-out($bg, $btn-fadeout-offset); }
+}
+
+@mixin make-btn-raised() {
+    @include btn-raised();
+
+    @each $n, $c in $colors {
+        &.#{$n}, &.btn-#{$n} { @include btn-raised($c); }
+    }
+}
+
+@mixin btn-size($font: map-get(map-get($form-control-size, default), font),
+                $height: map-get(map-get($form-control-size, default), height),
+                $padding-x: map-get(map-get($form-control-size, default), padding-x)) {
+    font-size: $font;
+    height: $height;
+    padding: 0 $padding-x;
+}
+
+@mixin btn() {
+    align-items: center;
+    background: $btn-default-background;
+    border: none;
+    border-radius: $btn-border-radius;
+    cursor: pointer;
+    display: inline-flex;
+    font-family: $btn-font;
+    justify-content: center;
+    text-decoration: none;
+    text-transform: $btn-text-transform;
+    transition: background $timing-duration $timing-fn,
+                border $timing-duration $timing-fn,
+                box-shadow $timing-duration $timing-fn,
+                color $timing-duration $timing-fn,
+                transform $timing-duration $timing-fn;
+    -webkit-appearance: none; // safari fix
+
+    @include btn-size();
+
+    &:hover {
+        text-decoration: none;
+    }
+
+    &:disabled, &[disabled], &.disabled {
+        cursor: not-allowed;
+    }
+
+    &:not(.disabled):not(:disabled):not([disabled]) {
+        @include btn-hover();
+    }
+
+    &.icon {
+        border: none;
+        padding-left: .5em;
+        padding-right: .5em;
+
+        .fa {
+            width: 1em;
+            text-align: center;
+        }
+    }
+}
+
+.btn, a.btn {
+    @include btn();
+
+    @each $name, $size in $form-control-size {
+        &.#{$name} {
+            @include btn-size(map-get($size, font), map-get($size, height), map-get($size, padding-x));
+        }
+    }
+
+    @if ($btn-default-style == outline) {
+        @include make-btn-outline();
+        &.plane { @include make-btn-plane(); }
+        &.raised { @include make-btn-raised(); }
+    }
+    @else if ($btn-default-style == raised) {
+        @include make-btn-raised();
+        &.outline { @include make-btn-outline(); }
+        &.plane { @include make-btn-plane(); }
+    }
+    @else {
+        @include make-btn-plane();
+        &.outline { @include make-btn-outline(); }
+        &.raised { @include make-btn-raised(); }
+    }
+
+    &.icon {
+        @include make-btn-plane();
+    }
+}
+
+input[type=button],
+input[type=submit],
+button {
+    &:not(.btn-icon):not(.hide) { @extend .btn; }
+}
+
+input[type=submit],
+button[type=submit] {
+    &:not(.btn-icon):not(.hide) {
+        @extend .btn;
+        @extend .btn.raised.success !optional;
+    }
+}

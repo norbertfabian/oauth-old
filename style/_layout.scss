@@ -1,0 +1,82 @@
+// Container
+//
+// Unlike the Bootstrap solution, the class .container is by default fluid.
+// Aditional behavior is extending the class directly in favor of Object Oriented CSS
+
+.container {
+    @include make-container();
+    @include make-container-max-classes();
+
+    &.steps { @include make-container-max-widths(); }
+}
+
+// max width
+
+// @each $key, $value in $container-max-widths {
+//     @include media-breakpoint-up($key) {
+//         .max-w-#{$key} { max-width: $value; }
+//     }
+// }
+
+// Layout - different naming conventions than Bootstrap's row -> col system
+// in order to utilize both (row & column) directions
+
+@if $enable-grid-classes {
+    .layout {
+        @include make-layout();
+
+        &.row { flex-direction: row; }
+        &.col { flex-direction: column; }
+
+        &.wrap { flex-wrap: wrap; }
+        &.nowrap { flex-wrap: nowrap; }
+    }
+
+    .flex {
+        @include make-flex();
+        flex: 1 1 auto;
+    }
+    @include make-layout-items();
+
+    // Flex variations
+    // order
+    .flex-first { order: -1; }
+    .flex-last { order: 1; }
+
+    @each $breakpoint in map-keys($grid-breakpoints) {
+        @include media-breakpoint-up($breakpoint) {
+            .flex-#{$breakpoint}-first { order: -1; }
+            .flex-#{$breakpoint}-last  { order: 1; }
+        }
+    }
+
+    // justify-content
+    .justify-start   { justify-content: flex-start; }
+    .justify-end     { justify-content: flex-end; }
+    .justify-center  { justify-content: center; }
+    .justify-between { justify-content: space-between; }
+    .justify-around  { justify-content: space-around; }
+
+    @each $breakpoint in map-keys($grid-breakpoints) {
+        @include media-breakpoint-up($breakpoint) {
+            .justify-#{$breakpoint}-start   { justify-content: flex-start; }
+            .justify-#{$breakpoint}-end     { justify-content: flex-end; }
+            .justify-#{$breakpoint}-center  { justify-content: center; }
+            .justify-#{$breakpoint}-between { justify-content: space-between; }
+            .justify-#{$breakpoint}-around  { justify-content: space-around; }
+        }
+    }
+
+    // align-items
+    .align-start    { align-items: flex-start; }
+    .align-center   { align-items: center; }
+    .align-end      { align-items: flex-end; }
+
+    @each $breakpoint in map-keys($grid-breakpoints) {
+        @include media-breakpoint-up($breakpoint) {
+            .align-#{$breakpoint}-start    { align-items: flex-start; }
+            .align-#{$breakpoint}-center   { align-items: center; }
+            .align-#{$breakpoint}-end      { align-items: flex-end; }
+        }
+    }
+}

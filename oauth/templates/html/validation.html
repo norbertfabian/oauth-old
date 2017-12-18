@@ -1,0 +1,18 @@
+{% extends "html/base.html" %}
+{% block title %}oAuth.cz | Ověření uživatele{% endblock %}
+{% block main %}
+    <div class="container steps max-xs layout row align-center">
+        <form method="post">
+            <fieldset>
+                <legend>Ověření uživatele</legend>
+                <input type="hidden" name="id_user" value="{{ id_user }}" />
+                <input name="secret" type="password" placeholder="Bezpečnostní kód">
+                <button type="submit" class="primary">Ověřit</button>
+            </fieldset>
+        </form>
+
+        <code>
+        {{ g.errors }}
+        </code>
+    </div>
+{% endblock %}

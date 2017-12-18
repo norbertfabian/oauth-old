@@ -1,0 +1,16 @@
+{% extends "email/base.txt" %}
+{% set email = user.email %}
+
+{% block title %}oAuth.cz - {{ subject|h1 }}{% endblock %}
+{% block content %}
+Uživatel {{ user.username }} podal/a žádost o registraci na stránkách {{ url_for('index', _external=True) }}
+Pokud se jedná o Vás, pokračujte v dokončení registrace následujícím odkazem:
+
+{{ url_for('confirm', id_user=user.id, secret=secret, _external=True) }}
+
+{{ 'Informace o uživateli'|h2 }}
+Uživatelské jméno: {{ user.username }}
+E-mail:            {{ email }}
+ID uživatele:      {{ user.id }}
+Bezpečnostní kód:  {{ secret }}
+{% endblock %}

@@ -1,0 +1,34 @@
+{% extends "email/base.html" %}
+
+{% block subject %}oAuth.cz - {{ subject }}{% endblock %}
+{% block content %}
+<div>
+    <p>
+        Uživatel <strong>{{ user.username }}</strong> podal/a žádost o registraci na stránkách <a href="{{ url_for('index', _external=True) }}">{{ url_for('index', _external=True) }}</a><br />
+        Pokud se jedná o Vás, <a href="{{ url_for('confirm', id_user=user.id, secret=secret, _external=True) }}">pokračujte v dokončení registrace</a>.
+    </p>
+
+    <table>
+        <caption>Informace o uživateli</caption>
+        <tr>
+            <th>Uživatelské jméno</th>
+            <td>{{ user.username }}</td>
+        </tr>
+
+        <tr>
+            <th>E-mail</th>
+            <td>{{ email }}</td>
+        </tr>
+
+        <tr>
+            <th>ID uživatele</th>
+            <td>{{ user.id }}</td>
+        </tr>
+
+        <tr>
+            <th>Bezpečnostní kód</th>
+            <td>{{ secret }}</td>
+        </tr>
+    </table>
+</div>
+{% endblock %}

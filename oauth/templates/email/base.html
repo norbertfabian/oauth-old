@@ -1,0 +1,31 @@
+<html>
+    <head>
+        <title>oAuth.cz | Registrace</title>
+        <style>
+            body { background: white; color: black; font-family: Helvetica Neue,Helvetica,Arial,sans-serif; font-size: 16px; line-height: 1.5; text-align: center; }
+            h1 { font-size: 24px; margin-bottom: 32px; margin-top: 32px; }
+            th, td { text-align: left; }
+            a { color: #00c5ff; text-decoration: none; }
+            a:hover { text-decoration: underline; }
+            footer { border-top: 1px solid #eceeef; margin-top: 16px; }
+            table { border-spacing: 0; border-collapse: separate; margin: 32px auto; }
+            caption { border-bottom: 1px solid #eceeef; font-size: 20px; line-height: 32px; }
+            th, td { padding: 4px 16px; }
+            tr:not(:last-child) th, tr:not(:last-child) td { border-bottom: 1px solid #eceeef; }
+        </style>
+    </head>
+    <body>
+        <h1>{% block subject %}oAuth.cz{% endblock %}</h1>
+        {% block content %}{% endblock %}
+        <footer>
+        {% block footer %}
+            <p>
+                <small>
+                    Tento email byl vegenerován automaticky. Pokud s jeho doručením nesouhlasíte, stačí jej ignorovat. Další emaily by již přijít neměly.<br />
+                    Pokud ovšem chcete zabránit jakýmkoli budoucím emailům z naší domény, můžete se <a href="{{ url_for('blacklist', email=email, hash=email|hashmail, _external=True) }}">odhlásit z příjmání zpráv</a>.
+                </small>
+            </p>
+        {% endblock %}
+        </footer>
+    </body>
+</html>

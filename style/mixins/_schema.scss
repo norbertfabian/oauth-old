@@ -1,0 +1,24 @@
+@mixin schema($bg-color: $body-bg, $color-sl: $body-color-sl, $color-sd: $body-color-sd) {
+    @if ($bg-color == init) {
+        @if (lightness($body-bg) < 50) { @include make-schema($bg-color, $color-sd); }
+        @else { @include make-schema($bg-color, $color-sl); }
+    }
+    @else if (lightness($bg-color) < 50) {
+        // dark schema
+        @if (lightness($body-bg) >= 50) { @include make-schema($bg-color, $color-sd); }
+    }
+    @else {
+        // light schema
+        @if (lightness($body-bg) < 50) { @include make-schema($bg-color, $color-sl); }
+    }
+}
+
+@mixin make-schema($bg-color, $color) {
+    color: $color;
+
+    @if ($bg-color != init) {
+        .page-header & a {
+            color: $color;
+        }
+    }
+}

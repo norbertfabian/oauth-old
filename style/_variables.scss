@@ -1,0 +1,265 @@
+// bourbon variables
+$em-base:                       16px;
+
+// font-awesome variables
+$fa-font-path:                  "/static/fonts";
+
+// environment variables
+$enable-hover-media-query:      false !default;
+$enable-grid-classes:           true !default;
+
+
+//
+// COLORS
+//
+
+$black:                         #000 !default;
+$white:                         #FFF !default;
+
+// Grays
+$gray-dark-1:                   #373a3c !default;
+$gray:                          #55595c !default; // neutral gray
+$gray-light-1:                  #818a91 !default;
+$gray-light-2:                  #eceeef !default;
+$gray-light-3:                  #f7f7f9 !default;
+
+// Brand colors
+$color-default:                 rgb(29, 45, 68) !default;
+$color-primary:                 #00C5FF !default;
+$color-accent:                  #F60541 !default;
+$color-success:                 #51a351 !default;
+$color-info:                    #5bc0de !default;
+$color-warning:                 #ff7e00 !default;
+$color-danger:                  #BF0904 !default;
+
+// Color list used in repeaters
+$colors: (
+    default:    $color-default,
+    primary:    $color-primary,
+    accent:     $color-accent,
+    success:    $color-success,
+    info:       $color-info,
+    warning:    $color-warning,
+    danger:     $color-danger,
+    muted:      $gray-light-2,
+    white:      $white
+) !default;
+
+//
+// GRID
+//
+
+// Grid breakpoints
+//
+// Define the minimum and maximum dimensions at which your layout will change,
+// adapting to different screen sizes, for use in media queries.
+
+$grid-breakpoints: (
+    // Extra small screen / phone
+    xs: 0,
+    // Small screen / phone
+    sm: 544px,
+    // Medium screen / tablet
+    md: 768px,
+    // Large screen / desktop
+    lg: 992px,
+    // Extra large screen / wide desktop
+    xl: 1200px
+) !default;
+
+
+// Grid containers
+//
+// Define the maximum width of `.container` for different screen sizes.
+
+$container-max-widths: (
+    xs: 380px,
+    sm: 576px,
+    md: 720px,
+    lg: 940px,
+    xl: 1140px
+) !default;
+
+// Grid columns
+//
+// Set the number of columns and specify the width of the gutters.
+
+$grid-columns:                  12 !default;
+$grid-gutter-x:                 1.875rem !default; // 30px if 1rem == 16px
+$grid-gutter-y:                 1.875rem !default;
+
+//
+// SPACING
+//
+// Control the default styling of most elements by modifying these variables. Mostly focused on spacing.
+
+$spacer:                     1rem !default;
+$spacer-x:                   $spacer !default;
+$spacer-y:                   $spacer !default;
+$spacers: (
+    0: (
+        x:   0,
+        y:   0
+    ),
+    1: (
+        x:   ($spacer-x/2),
+        y:   ($spacer-y/2)
+    ),
+    2: (
+        x:   $spacer-x,
+        y:   $spacer-y
+    ),
+    3: (
+        x:   ($spacer-x * 1.5),
+        y:   ($spacer-y * 1.5)
+    ),
+    4: (
+        x:   ($spacer-x * 3),
+        y:   ($spacer-y * 3)
+    ),
+    g: (
+        x: ($grid-gutter-x/2),
+        y: ($grid-gutter-y/2)
+    )
+) !default;
+
+
+//
+// TYPOGRAPHY
+//
+// Font, line-height, and color for body text, headings, and more.
+
+$font-family-sans-serif:        "Helvetica Neue", Helvetica, Arial, sans-serif !default;
+$font-family-serif:             Georgia, "Times New Roman", Times, serif !default;
+$font-family-monospace:         Menlo, Monaco, Consolas, "Courier New", monospace !default;
+$font-family-base:              $font-family-sans-serif !default;
+
+$font-size-root:                $em-base !default;
+
+$line-height:                   1.5 !default;
+
+$font-size-base:                $em-base !default;
+$font-size-lg:                  1.25rem !default;
+$font-size-sm:                  .875rem !default;
+$font-size-xs:                  .75rem !default;
+
+$font-size-h1:                  2.5rem !default;
+$font-size-h2:                  2rem !default;
+$font-size-h3:                  1.75rem !default;
+$font-size-h4:                  1.5rem !default;
+$font-size-h5:                  1.25rem !default;
+$font-size-h6:                  1rem !default;
+
+$line-height:                   1.5 !default;
+
+$headings-margin-bottom:        ($spacer / 2) !default;
+$headings-margin-top:           0 !default;
+$headings-font-family:          inherit !default;
+$headings-font-weight:          500 !default;
+$headings-line-height:          1.1 !default;
+$headings-color:                inherit !default;
+
+//
+// TIMING
+//
+$timing-duration:               200ms !default;
+$timing-fn:                     ease-out !default;
+
+//
+// Basic page variables
+//
+
+$body-bg:                       $white !default;
+$body-color-sl:                 rgba(0,0,0,.8) !default; // default font color for light schema
+$body-color-sd:                 rgba(255,255,255,.8) !default; // default font color for dark schema
+
+$border-width:                  1px !default;
+$border-radius:                 3px !default;
+
+$abbr-border-color:             $gray-light-1 !default;
+
+$hr-border-color-sl:            fade-out($black, .9) !default;
+$hr-border-color-sd:            fade-out($white, .9) !default;
+$hr-border-width:               $border-width !default;
+
+$dt-font-weight:                bold !default;
+
+//
+// Links
+//
+// Style anchor elements.
+
+$link-color:                    $color-primary !default;
+$link-decoration:               none !default;
+$link-hover-color:              darken($link-color, 15%) !default;
+$link-hover-decoration:         underline !default;
+
+//
+// Tables
+//
+// Customizes the `.table` component with basic values, each used across all table variations.
+
+$table-cell-padding:            .75rem !default;
+$table-sm-cell-padding:         .3rem !default;
+
+//
+// Forms
+//
+
+$form-control-border-radius:    $border-radius !default;
+
+$form-control-size: (
+    xs: (
+        font: .6rem,
+        height: 1rem,
+        padding-x: .5rem
+    ),
+    sm: (
+        font: 1rem,
+        height: 1.5rem,
+        padding-x: .5rem
+    ),
+    md: (
+        font: 1rem,
+        height: 2rem,
+        padding-x: .5rem
+    ),
+    lg: (
+        font: 1rem,
+        height: 2.5rem,
+        padding-x: .5rem
+    ),
+    xl: (
+        font: 1.2rem,
+        height: 3rem,
+        padding-x: 1rem
+    ),
+    default: (
+        font: 1rem,
+        height: 2rem,
+        padding-x: .5rem
+    )
+);
+
+$btn-border:                    $color-default 1px solid !default;
+$btn-border-radius:             $form-control-border-radius !default;
+$btn-font:                      $font-family-sans-serif !default;
+$btn-shadow:                    none !default;
+$btn-shadow-a:                  0 1px 4px -1px fade-out($black, .5) !default;
+$btn-shadow-h:                  0 2px 8px -2px fade-out($black, .5) !default;
+$btn-text-transform:            uppercase !default;
+$btn-transform:                 none !default;
+$btn-transform-a:               translateY(-.5px) !default;
+$btn-transform-h:               translateY(-1px) !default;
+
+$btn-default-background:        $color-default !default;
+$btn-default-color:             $color-default !default;
+$btn-default-style:             raised !default;
+
+$input-background:              $white !default;
+$input-background-d:            fade-out($input-background, .4) !default;
+$input-border:                  $gray-light-1 1px solid !default;
+$input-border-radius:           $form-control-border-radius !default;
+$input-border-a:                $color-primary 1px solid !default;
+$input-border-d:                fade-out(nth($input-border, 1), .4) !default;
+$input-border-e:                $color-danger 1px solid !default;
